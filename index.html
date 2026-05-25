@@ -1,0 +1,518 @@
+
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Профбухгалтерия | Бухгалтерия для бизнеса</title>
+    <!-- Google Fonts + Font Awesome 6 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #fbfdff;
+            color: #0b1c2e;
+            line-height: 1.4;
+            scroll-behavior: smooth;
+        }
+
+        /* цветовые переменные */
+        :root {
+            --bg-light: #ffffff;
+            --bg-alt: #f8fafc;
+            --primary-dark: #0b2b44;
+            --primary: #1e4a76;
+            --accent: #f5a65b;
+            --accent-dark: #e8892c;
+            --accent-glow: rgba(245, 166, 91, 0.2);
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-600: #475569;
+            --gray-800: #1e293b;
+            --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.03), 0 2px 6px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 12px 28px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(0, 0, 0, 0.01);
+            --shadow-hover: 0 25px 35px -12px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.02);
+            --border-radius-card: 1.25rem;
+            --transition: all 0.25s cubic-bezier(0.2, 0, 0, 1);
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            margin: 5rem 0;
+        }
+
+        /* Градиентный заголовок с прозрачностью текста */
+        .gradient-headline {
+            font-size: clamp(2.2rem, 6vw, 3.8rem);
+            font-weight: 800;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #194c6e 0%, #2d7f9e 35%, #f5a65b 70%, #e8892c 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.25rem;
+            text-wrap: balance;
+        }
+
+        .subhead {
+            font-size: 1.25rem;
+            line-height: 1.5;
+            color: var(--gray-600);
+            max-width: 780px;
+            margin-top: 0.5rem;
+            font-weight: 450;
+            border-left: 3px solid var(--accent);
+            padding-left: 1.3rem;
+        }
+
+        /* иерархия: заголовки секций */
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            color: var(--primary-dark);
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 8px;
+        }
+        .section-sub {
+            font-weight: 500;
+            font-size: 1rem;
+            color: var(--accent-dark);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Сетка решений (ключевые решения) */
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        .solution-card {
+            background: var(--bg-light);
+            border-radius: var(--border-radius-card);
+            padding: 1.8rem;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-100);
+        }
+        .solution-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--accent-glow);
+        }
+        .solution-icon {
+            font-size: 2.2rem;
+            color: var(--accent);
+            margin-bottom: 1.2rem;
+        }
+        .solution-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--primary-dark);
+        }
+        .solution-card p {
+            color: var(--gray-600);
+            line-height: 1.5;
+        }
+
+        /* Карточки навыков с анимацией */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0 0.5rem;
+        }
+        .skill-card {
+            background: var(--bg-light);
+            border-radius: var(--border-radius-card);
+            padding: 1.8rem 1.5rem;
+            text-align: center;
+            transition: transform 0.25s ease, box-shadow 0.3s;
+            box-shadow: var(--shadow-sm);
+            border-bottom: 3px solid transparent;
+        }
+        .skill-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--shadow-hover);
+            border-bottom-color: var(--accent);
+        }
+        .skill-icon {
+            font-size: 2.5rem;
+            background: linear-gradient(145deg, var(--primary-dark), #2b6a9e);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+        }
+        .skill-card h4 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .skill-card p {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+        }
+
+        /* Выделенные блоки кейсов */
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .case-block {
+            background: var(--bg-alt);
+            border-left: 6px solid var(--accent);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+        .case-block:hover {
+            background: white;
+            box-shadow: var(--shadow-md);
+            transform: translateX(5px);
+        }
+        .case-tag {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--accent-dark);
+            letter-spacing: 0.5px;
+            margin-bottom: 0.75rem;
+        }
+        .case-block h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .case-block p {
+            color: var(--gray-600);
+            line-height: 1.5;
+        }
+        .case-result {
+            margin-top: 1rem;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Почему мы? сетка 4 карточки */
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.8rem;
+            margin: 2rem 0;
+        }
+        .why-item {
+            background: white;
+            border-radius: 1.25rem;
+            padding: 1.6rem;
+            transition: all 0.2s;
+            border: 1px solid var(--gray-100);
+        }
+        .why-item i {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+        .why-item h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .why-item p {
+            color: var(--gray-600);
+            line-height: 1.4;
+        }
+
+        /* Сетка инструментов в виде тегов */
+        .tools-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.9rem;
+            margin: 2rem 0 1rem;
+        }
+        .tool-tag {
+            background: var(--gray-100);
+            border-radius: 100px;
+            padding: 0.6rem 1.2rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--primary-dark);
+            transition: all 0.2s;
+            backdrop-filter: blur(2px);
+            letter-spacing: -0.2px;
+            border: 1px solid transparent;
+        }
+        .tool-tag i {
+            margin-right: 8px;
+            font-size: 0.85rem;
+            color: var(--accent);
+        }
+        .tool-tag:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-2px);
+            border-color: var(--accent);
+        }
+        .tool-tag:hover i {
+            color: white;
+        }
+
+        /* акцентные элементы */
+        .accent-text {
+            color: var(--accent-dark);
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, var(--gray-200), transparent);
+        }
+
+        /* адаптивность */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1.2rem;
+            }
+            section {
+                margin: 3rem 0;
+            }
+            .section-title {
+                font-size: 1.75rem;
+            }
+            .gradient-headline {
+                margin-bottom: 0.8rem;
+            }
+            .subhead {
+                font-size: 1rem;
+                padding-left: 1rem;
+            }
+            .skills-grid, .solutions-grid, .cases-grid, .why-grid {
+                gap: 1.2rem;
+            }
+            .solution-card, .skill-card, .case-block, .why-item {
+                padding: 1.2rem;
+            }
+            .tools-tags {
+                gap: 0.7rem;
+            }
+            .tool-tag {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gradient-headline {
+                font-size: 1.9rem;
+            }
+            .section-title {
+                font-size: 1.6rem;
+            }
+        }
+
+        /* дополнительные акценты */
+        .highlight-badge {
+            background: var(--accent-glow);
+            color: var(--accent-dark);
+            border-radius: 40px;
+            padding: 0.2rem 1rem;
+            font-weight: 600;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: var(--gray-600);
+            border-top: 1px solid var(--gray-100);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero-блок: градиентный заголовок -->
+        <section style="margin-top: 3rem;">
+            <h1 class="gradient-headline">
+                Бухгалтерия, которая понимает ваш бизнес.<br>От проекта до отчетности.
+            </h1>
+            <p class="subhead">
+                Комплексное обслуживание юридических лиц в сферах аренды, промышленного строительства и инжиниринга.
+            </p>
+        </section>
+
+        <!-- Ключевые решения для вас (три блока решений) -->
+        <section>
+            <div class="section-sub">стратегия</div>
+            <h2 class="section-title">Ключевые решения для вас</h2>
+            <div class="solutions-grid">
+                <div class="solution-card">
+                    <div class="solution-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>От МСП до крупного бизнеса</h3>
+                    <p>Масштабируем учет под любую нагрузку и количество операций. Гибкие тарифы и облачная инфраструктура.</p>
+                </div>
+                <div class="solution-card">
+                    <div class="solution-icon"><i class="fas fa-diagram-project"></i></div>
+                    <h3>Проектный учет</h3>
+                    <p>Полная организация бухгалтерии под отдельный проект Заказчика (с нуля или доработка текущей схемы). Детальный P&L по задачам.</p>
+                </div>
+                <div class="solution-card">
+                    <div class="solution-icon"><i class="fas fa-helmet-safety"></i></div>
+                    <h3>Отраслевая экспертиза</h3>
+                    <p>Знаем специфику строительной техники, материалов, длинных циклов договоров и тонкости арендных платежей.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- КАРТОЧКИ НАВЫКОВ с анимацией при наведении -->
+        <section>
+            <div class="section-sub">компетенции</div>
+            <h2 class="section-title">Наши ключевые навыки</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-calculator"></i></div>
+                    <h4>Налоговая оптимизация</h4>
+                    <p>Аттестованные эксперты с опытом 10+ лет. Легальное снижение налоговой нагрузки.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-hard-hat"></i></div>
+                    <h4>Строительный контроллинг</h4>
+                    <p>Управление затратами стройматериалов, генподряд, сметный учет.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-file-signature"></i></div>
+                    <h4>Договорная экспертиза</h4>
+                    <p>Анализ рисков, закрытие актов КС-2, КС-3, арендные взаиморасчеты.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-chart-pie"></i></div>
+                    <h4>Управленческая отчётность</h4>
+                    <p>От проектных дашбордов до консолидации по ГК в реальном времени.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Примеры кейсов в выделенных блоках -->
+        <section>
+            <div class="section-sub">реальные результаты</div>
+            <h2 class="section-title">Кейсы и внедрения</h2>
+            <div class="cases-grid">
+                <div class="case-block">
+                    <div class="case-tag"><i class="fas fa-building"></i> строительный холдинг</div>
+                    <h4>Цифровизация проектного учёта</h4>
+                    <p>Внедрили пообъектный учёт для 12 одновременно строящихся ЖК. Прозрачность затрат выросла на 40%, ошибки сведены к 0.</p>
+                    <div class="case-result"><i class="fas fa-chart-simple"></i> Оптимизация себестоимости — 18%</div>
+                </div>
+                <div class="case-block">
+                    <div class="case-tag"><i class="fas fa-warehouse"></i> арендный бизнес</div>
+                    <h4>Автоматизация арендных платежей</h4>
+                    <p>Снизили задолженность дебиторов на 62% через автоматизацию сверок и актов аренды спецтехники.</p>
+                    <div class="case-result"><i class="fas fa-clock"></i> Экономия времени 30 часов/мес</div>
+                </div>
+                <div class="case-block">
+                    <div class="case-tag"><i class="fas fa-microchip"></i> инжиниринговая компания</div>
+                    <h4>Бухгалтерия под ключ для EPC-проекта</h4>
+                    <p>Разработали учёт с нуля для контракта на 2.3 млрд ₽, включая налоговое сопровождение и валютные риски.</p>
+                    <div class="case-result"><i class="fas fa-check-circle"></i> Полное прохождение проверок ИФНС</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Почему мы? (кадры, надежность, результат, учет под ключ) -->
+        <section>
+            <div class="section-sub">преимущества</div>
+            <h2 class="section-title">Почему мы?</h2>
+            <div class="why-grid">
+                <div class="why-item">
+                    <i class="fas fa-user-tie"></i>
+                    <h4>Кадры</h4>
+                    <p>Штат только высокопрофессиональные специалисты (Аттестация, опыт от 10 лет).</p>
+                </div>
+                <div class="why-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <h4>Надежность</h4>
+                    <p>Закрываем вопросы с налоговой, фондами и рисками ваших контрактов.</p>
+                </div>
+                <div class="why-item">
+                    <i class="fas fa-chart-line"></i>
+                    <h4>Результат</h4>
+                    <p>Вы получаете чистые цифры и спокойствие, занимаясь своей прямой задачей.</p>
+                </div>
+                <div class="why-item">
+                    <i class="fas fa-handshake"></i>
+                    <h4>Учет под ключ</h4>
+                    <p>Без ошибок. С пониманием вашего инжиниринга и стройки. Полное ведение от первички до баланса.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Сетка инструментов в виде тегов -->
+        <section>
+            <div class="section-sub">технологический стек</div>
+            <h2 class="section-title">Инструменты & экосистема</h2>
+            <div class="tools-tags">
+                <span class="tool-tag"><i class="fab fa-1c"></i> 1С:Бухгалтерия</span>
+                <span class="tool-tag"><i class="fas fa-chart-simple"></i> 1С:ERP УХ</span>
+                <span class="tool-tag"><i class="fas fa-file-invoice"></i> СБИС ЭДО</span>
+                <span class="tool-tag"><i class="fas fa-cloud-upload-alt"></i> Контур.Диадок</span>
+                <span class="tool-tag"><i class="fas fa-chart-line"></i> Power BI</span>
+                <span class="tool-tag"><i class="fas fa-building"></i> DirectBank</span>
+                <span class="tool-tag"><i class="fas fa-calculator"></i> Такском</span>
+                <span class="tool-tag"><i class="fas fa-file-alt"></i> Налоговый мониторинг</span>
+                <span class="tool-tag"><i class="fas fa-chart-pie"></i> План-факт аналитика</span>
+                <span class="tool-tag"><i class="fas fa-project-diagram"></i> Trello / Jira (фин.отделы)</span>
+            </div>
+            <div class="tools-tags" style="margin-top: 0.5rem;">
+                <span class="tool-tag"><i class="fas fa-microchip"></i> BIM-учет</span>
+                <span class="tool-tag"><i class="fas fa-truck"></i> Учет спецтехники</span>
+                <span class="tool-tag"><i class="fas fa-charging-station"></i> Энергоэффективность</span>
+            </div>
+        </section>
+
+        <!-- дополнительный акцентный блок: доверие (clean) -->
+        <div class="highlight-badge" style="margin: 1rem 0 0 0; background: #eef2ff; display: inline-block;">
+            <i class="fas fa-check-circle"></i> Полное сопровождение — от регистрации до ликвидации бизнеса
+        </div>
+        <hr>
+        <footer>
+            <p>© 2025 Профбухгалтерия — экспертиза в аренде, строительстве и инжиниринге. Ваши чистые финансы — наша профессия.</p>
+        </footer>
+    </div>
+</body>
+</html>
